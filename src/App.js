@@ -12,7 +12,7 @@ import * as QuestionActions from './actions/QuestionActions'
 const App = ({match: { params }, history, questions, onSkipQuestionClicked, dispatch}) => (
     <div className="App">
         <QuestionPic picUrl={questions[getIndex(params)].picUrl}  />
-        <AnswerOptions />
+        <AnswerOptions question={questions[getIndex(params)]} dispatch={dispatch}/>
         <SubmitActions onSkipQuestionClicked={() => {
             dispatch(onSkipQuestionClicked(questions[getIndex(params)].id));
             history.push("/" + (parseInt(getIndex(params)) + 1));

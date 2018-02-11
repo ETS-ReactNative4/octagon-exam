@@ -18,7 +18,7 @@ export default function QuestionReducer(state = [], action) {
                     ? {...answer, isAnswered: true, selectedOption: action.selectedOption}
                     : answer);
         case ActionTypes.SKIP_QUESTION :
-            alert("hello " + action.id);
+            alert("SKIP_QUESTION " + action.id);
             return state.map(question =>
                 question.id === action.id
                 ? {...question, skipped: true}

@@ -7,3 +7,4 @@ export const CLEAR_COMPLETED = 'CLEAR_COMPLETED'*/
 
 
 export const SKIP_QUESTION = 'SKIP_QUESTION';
+export const MARK_ANSWER = 'MARK_ANSWER';
