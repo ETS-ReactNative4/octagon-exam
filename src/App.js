@@ -8,22 +8,23 @@ import ScoreBoard from "./components/ScoreBoard";
 import SubmitActions from "./components/SubmitActions";
 import {connect} from 'react-redux';
 import * as QuestionActions from './actions/QuestionActions'
+import * as Utils from "./utils/Utils";
 
 
 const App = ({match: { params }, history, questions, onSkipQuestionClicked, dispatch}) => (
     <div className="App">
         <QuestionPic picUrl={questions[getIndex(params)].picUrl} />
-        <AnswerOptions question={questions[getIndex(params)]} dispatch={dispatch} history={history} index={getIndex(params)}/>
+        <AnswerOptions question={questions[getIndex(params)]} dispatch={dispatch} history={history} index={getIndex(params)} totalQuestion={questions.length}/>
         <SubmitActions onSkipQuestionClicked={() => {
             dispatch(onSkipQuestionClicked(questions[getIndex(params)].id));
-            history.push("/" + (parseInt(getIndex(params)) + 1));
+            Utils.redirectToNextQuestion(history, getIndex(params), questions.length);
         }}/>
         <ScoreBoard questions={questions} />
     </div>
 );
 
 function getIndex(params){
-    return params.index || 0;
+    return parseInt(params.index) || 0;
 }
 
 App.propTypes = {
