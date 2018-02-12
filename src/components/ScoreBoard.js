@@ -19,7 +19,7 @@ export default class ScoreBoard extends Component {
         if(correct === 0){
             return 0;
         }
-        return (correct/(correct + this.wrongCount(questions))) * 100;
+        return parseFloat((correct/(correct + this.wrongCount(questions))) * 100).toFixed(2);
     }
 
     render(){
