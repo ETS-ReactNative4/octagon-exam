@@ -12,15 +12,20 @@ import * as Utils from "./utils/Utils";
 
 
 const App = ({match: { params }, history, questions, onSkipQuestionClicked, dispatch}) => (
-    <div className="App">
-        <QuestionPic picUrl={questions[getIndex(params)].picUrl} />
-        <AnswerOptions question={questions[getIndex(params)]} dispatch={dispatch} history={history} index={getIndex(params)} totalQuestion={questions.length}/>
-        <SubmitActions onSkipQuestionClicked={() => {
-            dispatch(onSkipQuestionClicked(questions[getIndex(params)].id));
-            Utils.redirectToNextQuestion(history, getIndex(params), questions.length);
-        }}/>
-        <ScoreBoard questions={questions} />
+    <div className="row">
+        <div className="col-md-8 col-sm-12">
+            <QuestionPic picUrl={questions[getIndex(params)].picUrl} />
+            <AnswerOptions question={questions[getIndex(params)]} dispatch={dispatch} history={history} index={getIndex(params)} totalQuestion={questions.length}/>
+            <SubmitActions onSkipQuestionClicked={() => {
+                dispatch(onSkipQuestionClicked(questions[getIndex(params)].id));
+                Utils.redirectToNextQuestion(history, getIndex(params), questions.length);
+            }}/>
+        </div>
+        <div className="col-md-4 col-sm-12">
+            <ScoreBoard questions={questions} />
+        </div>
     </div>
+
 );
 
 function getIndex(params){
