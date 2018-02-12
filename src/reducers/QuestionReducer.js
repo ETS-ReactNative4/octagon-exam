@@ -23,6 +23,12 @@ export default function QuestionReducer(state = [], action) {
                 question.id === action.id
                 ? {...question, skipped: true}
                 :question);
+        case ActionTypes.MARK_ANSWER_CORRECT:
+            return state.map(question =>
+                question.id === action.id
+                ? {...question, answerCorrect: true}
+                : question
+            );
         default:
             return state
     }

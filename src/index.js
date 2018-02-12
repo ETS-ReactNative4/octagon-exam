@@ -18,21 +18,24 @@ let predefineStateFromServer = {
             "isAnswered": false,
             'picUrl': 'question-sample.png',
             'answer': 'A',
-            'selectedOption': null
+            'selectedOption': null,
+            'answerCorrect': null
         },
         {
             id: 3,
             "isAnswered": false,
             'picUrl': 'question-sample-2.png',
             'answer': 'D',
-            'selectedOption': null
+            'selectedOption': null,
+            'answerCorrect': null
         },
         {
             id: 4,
             "isAnswered": false,
             'picUrl': 'question-sample-3.png',
             'answer': 'C',
-            'selectedOption': null
+            'selectedOption': null,
+            'answerCorrect': null
         }
     ]
 

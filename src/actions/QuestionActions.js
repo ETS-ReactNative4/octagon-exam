@@ -6,13 +6,19 @@ export function markAnswer(id, selectedOption){
     return { type: ActionTypes.MARK_ANSWER, id: id, selectedOption: selectedOption}
 }
 
+export function markAnswerCorrect(id){
+    return { type: ActionTypes.MARK_ANSWER_CORRECT, id: id}
+}
+
 export function markAnswerTest(question, selectedOption) {
     return dispatch => {
         dispatch(markAnswer(question.id, selectedOption));
 
         question.selectedOption = selectedOption; //hack
         if(RestClient.matchAnswer(question)){
+            dispatch(markAnswerCorrect(question.id));
             alert("Correct answer");
+
         } else {
             alert("wrong answer");
         }
