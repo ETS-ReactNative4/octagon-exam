@@ -15,15 +15,15 @@ export function markAnswerTest(question, selectedOption) {
         dispatch(markAnswer(question.id, selectedOption));
 
         question.selectedOption = selectedOption; //hack
-        if(RestClient.matchAnswer(question)){
-            dispatch(markAnswerCorrect(question.id));
-            alert("Correct answer");
-
-        } else {
-            alert("wrong answer");
-        }
-
-
+        RestClient.matchAnswer(question).then((output) => {
+                if(output){
+                    dispatch(markAnswerCorrect(question.id));
+                    alert("Correct answer");
+                } else {
+                    alert("wrong answer");
+                }
+            }
+        );
     }
 }
 

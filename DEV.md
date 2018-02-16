@@ -17,3 +17,5 @@ npm install --save react-router-dom
 
 npm install --save redux-thunk
 
+npm install --save cross-fetch
+

@@ -1,17 +1,8 @@
+import fetch from 'cross-fetch'
 
-
-export const matchAnswer = (question) => {
-    let serverResponse = {
-        'id': 2,
-        'picUrl': 'question-sample.png',
-        'answer': 'A',
-    };
-
-    let responseFromServer = serverResponse; //restApi(question) -> check questionId and selectedOption
-
-    if(question.id === responseFromServer.id
-            && question.selectedOption === serverResponse.answer){
-        return true;
-    }
-    return false;
+export let matchAnswer = (question) => {
+    return fetch("http://localhost:8793/api/question/" + question.id + "/answer/" + question.selectedOption)
+        .then(response => response.json(), error => console.log('An error occurred.', error))
+        .then(json => {console.log(json);
+            return json} );
 };
