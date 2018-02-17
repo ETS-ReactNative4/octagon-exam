@@ -28,11 +28,27 @@ export default class AnswerOptions extends Component {
         const {question} = this.props;
         return(
             <div>
-                Input choices here
-                <input type="radio" name="answer" value="A" checked={question.selectedOption === "A"} onClick={() => {this.pushAnswer("A")}}/> Option A
-                <input type="radio" name="answer" value="B" checked={question.selectedOption === "B"} onClick={() => {this.pushAnswer("B")}}/> Option B
-                <input type="radio" name="answer" value="C" checked={question.selectedOption === "C"} onClick={() => {this.pushAnswer("C")}}/> Option C
-                <input type="radio" name="answer" value="D" checked={question.selectedOption === "D"} onClick={() => {this.pushAnswer("D")}}/> Option D
+                <p className="text-muted">(Please Select one Option)</p>
+                <table className="table table-striped table-bordered  table-responsive">
+                    <tbody>
+                        <tr>
+                            <th scope="row"> <input type="radio" name="answer" value="A" checked={question.selectedOption === "A"} onClick={() => {this.pushAnswer("A")}}/></th>
+                            <td className="col-md-1">Option A</td>
+                        </tr>
+                        <tr>
+                            <th scope="row"><input type="radio" name="answer" value="B" checked={question.selectedOption === "B"} onClick={() => {this.pushAnswer("B")}}/></th>
+                            <td className="col-md-1">Option B</td>
+                        </tr>
+                        <tr>
+                            <th scope="row"><input type="radio" name="answer" value="C" checked={question.selectedOption === "C"} onClick={() => {this.pushAnswer("C")}}/></th>
+                            <td className="col-md-1">Option C</td>
+                        </tr>
+                        <tr>
+                            <th scope="row"><input type="radio" name="answer" value="D" checked={question.selectedOption === "D"} onClick={() => {this.pushAnswer("D")}}/></th>
+                            <td className="col-md-1">Option D</td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         )
     }

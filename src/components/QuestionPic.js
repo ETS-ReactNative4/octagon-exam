@@ -11,7 +11,7 @@ export default class QuestionPic extends Component{
         return (
             <div>
                 <img src={"/images/question/" + picUrl} />
-                Me Pic {picUrl} here
+               {/* Me Pic {picUrl} here*/}
             </div>
         )
     }

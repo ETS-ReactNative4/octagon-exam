@@ -4,9 +4,12 @@ import PropTypes from 'prop-types'
 const SubmitActions = ({onSkipQuestionClicked}) => (
     <div>
         <p>
-            Hint
+
         </p>
         <button className="btn btn-warning" onClick={onSkipQuestionClicked}>Skip Question</button>
+        <p className="margin-top-50">
+
+        </p>
     </div>
 );
 
