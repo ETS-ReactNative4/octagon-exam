@@ -8,7 +8,7 @@ import reducer from './reducers'
 import {Provider} from 'react-redux'
 import thunk from 'redux-thunk';
 import { BrowserRouter as Router, Route } from 'react-router-dom'
-
+import * as RestClient from './api/RestClient'
 
 
 let predefineStateFromServer = {
@@ -17,7 +17,6 @@ let predefineStateFromServer = {
             id: 2,
             "isAnswered": false,
             'picUrl': 'question-sample.png',
-            'answer': 'A',
             'selectedOption': null,
             'answerCorrect': null
         },
@@ -25,7 +24,6 @@ let predefineStateFromServer = {
             id: 3,
             "isAnswered": false,
             'picUrl': 'question-sample-2.png',
-            'answer': 'D',
             'selectedOption': null,
             'answerCorrect': null
         },
@@ -33,7 +31,6 @@ let predefineStateFromServer = {
             id: 4,
             "isAnswered": false,
             'picUrl': 'question-sample-3.png',
-            'answer': 'C',
             'selectedOption': null,
             'answerCorrect': null
         }
@@ -41,20 +38,27 @@ let predefineStateFromServer = {
 
 };
 
-const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-const store = createStore(reducer, predefineStateFromServer, composeEnhancers(
-    applyMiddleware(thunk)));
+RestClient.getRandomQuestions(10)
+    .then(json => {
+        const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+        const store = createStore(reducer, json, composeEnhancers(
+            applyMiddleware(thunk)));
 
-/*const store = createStore(reducer, predefineStateFromServer,
-    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());*/
+        /*const store = createStore(reducer, predefineStateFromServer,
+            window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());*/
 
-/*, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()*/
+        /*, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()*/
 
-ReactDOM.render(
-    <Provider store={store}>
-        <Router>
-            <Route path="/:index?" component={App} />
-        </Router>
-    </Provider>
-    , document.getElementById('root'));
-registerServiceWorker();
+        ReactDOM.render(
+            <Provider store={store}>
+                <Router>
+                    <Route path="/:index?" component={App} />
+                </Router>
+            </Provider>
+            , document.getElementById('root'));
+
+
+        registerServiceWorker();
+    });
+
+

@@ -18,9 +18,8 @@ export function markAnswerTest(question, selectedOption) {
         RestClient.matchAnswer(question).then((output) => {
                 if(output){
                     dispatch(markAnswerCorrect(question.id));
-                    alert("Correct answer");
                 } else {
-                    alert("wrong answer");
+                  //  alert("wrong answer");
                 }
             }
         );
