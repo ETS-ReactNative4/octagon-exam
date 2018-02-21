@@ -7,7 +7,7 @@ import {createStore, applyMiddleware, compose} from 'redux'
 import reducer from './reducers'
 import {Provider} from 'react-redux'
 import thunk from 'redux-thunk';
-import { BrowserRouter as Router, Route } from 'react-router-dom'
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import * as RestClient from './api/RestClient'
 
 
@@ -34,7 +34,10 @@ let predefineStateFromServer = {
             'selectedOption': null,
             'answerCorrect': null
         }
-    ]
+    ],
+    "auth": {
+        "userAuthenticated" : true,
+    }
 
 };
 
@@ -49,10 +52,22 @@ RestClient.getRandomQuestions(10)
 
         /*, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()*/
 
+       /* ReactDOM.render(
+            <Provider store={store}>
+                <Router>
+                    <Switch>
+                        <Route path="/login" component={Login} />
+                        <Route path="/question/:index?" component={App} />
+                        <Route path="/" component={App} />
+                    </Switch>
+                </Router>
+            </Provider>
+            , document.getElementById('root'));*/
+
         ReactDOM.render(
             <Provider store={store}>
                 <Router>
-                    <Route path="/:index?" component={App} />
+                     <Route path="/:index?" component={App} />
                 </Router>
             </Provider>
             , document.getElementById('root'));
@@ -60,5 +75,9 @@ RestClient.getRandomQuestions(10)
 
         registerServiceWorker();
     });
+
+
+
+
 
 

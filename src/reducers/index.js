@@ -1,9 +1,10 @@
 import { combineReducers } from 'redux'
 import QuestionReducer from './QuestionReducer'
+import AuthReducer from './AuthReducer'
 
 const rootReducer = combineReducers({
-/*    todos,*/
-    questions : QuestionReducer
+    questions : QuestionReducer,
+    auth: AuthReducer,
 });
 
 export default rootReducer

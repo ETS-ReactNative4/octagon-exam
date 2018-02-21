@@ -6,14 +6,18 @@ import QuestionPic from './components/QuestionPic'
 import AnswerOptions from "./components/AnswerOptions";
 import ScoreBoard from "./components/ScoreBoard";
 import SubmitActions from "./components/SubmitActions";
+import LoginRedirectMonitor from "./containers/LoginRedirectMonitor";
 import {connect} from 'react-redux';
 import * as QuestionActions from './actions/QuestionActions'
 import * as Utils from "./utils/Utils";
+import * as RestClient from './api/RestClient'
 
 
-const App = ({match: { params }, history, questions, onSkipQuestionClicked, dispatch}) => (
+const App = ({match: { params }, history, questions, onSkipQuestionClicked, dispatch}) => {
+    return(
     <div className="row">
         <div className="col-md-8 col-sm-12">
+            <LoginRedirectMonitor />
             <QuestionPic picUrl={questions[getIndex(params)].picUrl} />
             <AnswerOptions question={questions[getIndex(params)]} dispatch={dispatch} history={history} index={getIndex(params)} totalQuestion={questions.length}/>
             <SubmitActions onSkipQuestionClicked={() => {
@@ -25,8 +29,8 @@ const App = ({match: { params }, history, questions, onSkipQuestionClicked, disp
             <ScoreBoard questions={questions} />
         </div>
     </div>
-
-);
+    );
+};
 
 function getIndex(params){
     return parseInt(params.index) || 0;

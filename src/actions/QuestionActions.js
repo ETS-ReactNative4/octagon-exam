@@ -15,7 +15,7 @@ export function markAnswerTest(question, selectedOption) {
         dispatch(markAnswer(question.id, selectedOption));
 
         question.selectedOption = selectedOption; //hack
-        RestClient.matchAnswer(question).then((output) => {
+        RestClient.matchAnswer(question, dispatch).then((output) => {
                 if(output){
                     dispatch(markAnswerCorrect(question.id));
                 } else {
