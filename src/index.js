@@ -72,7 +72,6 @@ RestClient.getRandomQuestions(10)
             </Provider>
             , document.getElementById('root'));
 
-
         registerServiceWorker();
     });
 
