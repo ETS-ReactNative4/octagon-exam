@@ -7,9 +7,6 @@ export let matchAnswer = (question, dispatch) => {
         {
             headers: {
                 "Authorization": "Bearer " + TokenHolder.getJwtToken(),
-                'Access-Control-Allow-Origin':'*',
-                'Access-Control-Allow-Headers': '*',
-                'Access-Control-Expose-Headers': 'Authorization'
             }
         })
             .then(response => response.json(),
@@ -35,9 +32,6 @@ export let getRandomQuestions = (limit) => {
         return fetch("http://localhost:8793/api/questions/" + limit + "/subject/1/etoken/?encryptedUserId=" + defaultValueUser(),
             {
                 headers: {
-                    "Authorization": "Bearer " + "11",
-                    'Access-Control-Allow-Origin':'*',
-                    'Access-Control-Allow-Headers': '*'
                 }
             })
             .then(response => {
