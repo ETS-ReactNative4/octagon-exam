@@ -37,6 +37,10 @@ let predefineStateFromServer = {
     ],
     "auth": {
         "userAuthenticated" : true,
+    },
+    "questionDuration": {
+        "start" : true,
+        "counter" : 0
     }
 
 };

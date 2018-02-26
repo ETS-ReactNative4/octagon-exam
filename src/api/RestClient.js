@@ -42,6 +42,7 @@ export let getRandomQuestions = (limit) => {
                 console.log("questions suc"  + json);
               //  console.log(json);
                 json.auth = { userAuthenticated : true};
+                json.questionDuration = {start: true};
                 return json
             });
 };

@@ -7,6 +7,7 @@ import AnswerOptions from "./components/AnswerOptions";
 import ScoreBoard from "./components/ScoreBoard";
 import SubmitActions from "./components/SubmitActions";
 import LoginRedirectMonitor from "./containers/LoginRedirectMonitor";
+import Timer from "./containers/Timer";
 import {connect} from 'react-redux';
 import * as QuestionActions from './actions/QuestionActions'
 import * as Utils from "./utils/Utils";
@@ -18,6 +19,7 @@ const App = ({match: { params }, history, questions, onSkipQuestionClicked, disp
     <div className="row">
         <div className="col-md-8 col-sm-12">
             <LoginRedirectMonitor />
+            <Timer />
             <QuestionPic picUrl={questions[getIndex(params)].picUrl} />
             <AnswerOptions question={questions[getIndex(params)]} dispatch={dispatch} history={history} index={getIndex(params)} totalQuestion={questions.length}/>
             <SubmitActions onSkipQuestionClicked={() => {
