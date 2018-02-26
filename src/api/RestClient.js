@@ -24,6 +24,24 @@ export let matchAnswer = (question, dispatch) => {
                 return json} );
 };
 
+export let noteQuestionDurationTime = (count, question, dispatch) => {
+    return fetch("http://localhost:8793/api/question/" + question.id + "/time-count/" + count,
+        {
+            headers: {
+                "Authorization": "Bearer " + TokenHolder.getJwtToken(),
+            }
+        })
+            .then(() => {},
+                error => {
+                    console.log('An error occurred.', error);
+                   // const json = error.json();
+                  /*  if(json.type === "AUTHENTICATION_ERROR"){*/
+                        dispatch(authError());
+                /*    }*/
+                }
+            );
+};
+
 function authError(){
     return { type: ActionTypes.AUTHENTICATION_ERROR}
 }

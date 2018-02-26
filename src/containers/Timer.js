@@ -34,7 +34,7 @@ const mapDispatchToProps = (dispatch) => ({
 
 
 Timer.propTypes = {
-    start: PropTypes.number,
+    start: PropTypes.bool,
     counter: PropTypes.number,
     dispatch: PropTypes.func.isRequired
 };

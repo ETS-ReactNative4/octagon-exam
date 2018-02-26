@@ -12,13 +12,16 @@ export function markAnswerCorrect(id){
 }
 
 export function markAnswerTest(question, selectedOption) {
-    return dispatch => {
+    return (dispatch, getState) => {
+        const { questionDuration } = getState();
         dispatch(markAnswer(question.id, selectedOption));
 
         question.selectedOption = selectedOption; //hack
         RestClient.matchAnswer(question, dispatch).then((output) => {
+            RestClient.noteQuestionDurationTime(questionDuration.counter, question, dispatch); //erase
                 if(output){
                     dispatch(markAnswerCorrect(question.id));
+                    RestClient.noteQuestionDurationTime(questionDuration.counter, question, dispatch);
                     dispatch(TimerActions.resetPerQuestionTimer());
 
                 } else {
