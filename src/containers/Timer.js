@@ -6,7 +6,7 @@ import * as TimerActions from "../actions/TimerActions";
 
 const Timer = ({dispatch, start = false, counter = 0}) => {
     if(start){
-        startTimer(dispatch, counter);
+        startTimer(dispatch);
         dispatch(TimerActions.setStartToFalse());
     }
     return (
@@ -19,11 +19,10 @@ const mapStateToProps = (state) => ({
     counter: state.questionDuration.counter,
 });
 
-function startTimer(dispatch, counter){
+function startTimer(dispatch){
     setInterval(
         function () {
-            dispatch(TimerActions.incrementPerQuestionTimer(++counter));
-            console.log(counter);
+            dispatch(TimerActions.incrementPerQuestionTimer());
         }, 1000);
 }
 

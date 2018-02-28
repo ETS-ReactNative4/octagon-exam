@@ -22,13 +22,12 @@ export function markAnswerTest(question, selectedOption) {
                 if(output){
                     dispatch(markAnswerCorrect(question.id));
                     RestClient.noteQuestionDurationTime(questionDuration.counter, question, dispatch);
-                    dispatch(TimerActions.resetPerQuestionTimer());
-
                 } else {
                   //  alert("wrong answer");
                 }
             }
         );
+        dispatch(TimerActions.resetPerQuestionTimer());
     }
 }
 

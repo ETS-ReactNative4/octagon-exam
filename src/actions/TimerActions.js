@@ -1,11 +1,11 @@
 import * as ActionTypes from "../constants/ActionTypes";
 
 export function resetPerQuestionTimer(){
-    return { type: ActionTypes.RESET_PER_QUESTION_TIMER,  counter: 0, start: true}
+    return { type: ActionTypes.RESET_PER_QUESTION_TIMER,  counter: 0}
 }
 
-export function incrementPerQuestionTimer(counter){
-    return { type: ActionTypes.INCREMENT_PER_QUESTION_TIMER, counter: counter}
+export function incrementPerQuestionTimer(){
+    return { type: ActionTypes.INCREMENT_PER_QUESTION_TIMER}
 }
 
 export function setStartToFalse(){
