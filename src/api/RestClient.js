@@ -24,8 +24,8 @@ export let matchAnswer = (question, dispatch) => {
                 return json} );
 };
 
-export let noteQuestionDurationTime = (count, question, dispatch) => {
-    return fetch("http://localhost:8793/api/question/" + question.id + "/time-count/" + count,
+export let noteQuestionDurationTime = (count, questionId, dispatch, action) => {
+    return fetch("http://localhost:8793/api/question/" + questionId + "/time-count/" + count + "/action/" + action,
         {
             headers: {
                 "Authorization": "Bearer " + TokenHolder.getJwtToken(),

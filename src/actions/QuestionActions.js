@@ -2,7 +2,14 @@ import * as ActionTypes from "../constants/ActionTypes";
 import * as RestClient from "../api/RestClient";
 import * as TimerActions from "./TimerActions";
 
-export const skipQuestion = (id) => ({ type: ActionTypes.SKIP_QUESTION, id: id});
+export function skipQuestion (questionId) {
+    return (dispatch, getState) => {
+       const { questionDuration } = getState();
+       dispatch(TimerActions.resetPerQuestionTimer());
+       RestClient.noteQuestionDurationTime(questionDuration.counter, questionId, dispatch, "SKIPPED");
+       return ({ type: ActionTypes.SKIP_QUESTION, id: questionId});
+    };
+}
 export function markAnswer(id, selectedOption){
     return { type: ActionTypes.MARK_ANSWER, id: id, selectedOption: selectedOption}
 }
@@ -17,11 +24,12 @@ export function markAnswerTest(question, selectedOption) {
         dispatch(markAnswer(question.id, selectedOption));
 
         question.selectedOption = selectedOption; //hack
+
+        RestClient.noteQuestionDurationTime(questionDuration.counter, question.id, dispatch, "ANSWERED");
         RestClient.matchAnswer(question, dispatch).then((output) => {
-            RestClient.noteQuestionDurationTime(questionDuration.counter, question, dispatch); //erase
                 if(output){
                     dispatch(markAnswerCorrect(question.id));
-                    RestClient.noteQuestionDurationTime(questionDuration.counter, question, dispatch);
+
                 } else {
                   //  alert("wrong answer");
                 }
