@@ -15,23 +15,34 @@ import * as RestClient from './api/RestClient'
 
 
 const App = ({match: { params }, history, questions, onSkipQuestionClicked, dispatch}) => {
-    return(
-    <div className="row">
-        <div className="col-md-8 col-sm-12">
-            <LoginRedirectMonitor />
-            <Timer />
-            <QuestionPic picUrl={questions[getIndex(params)].picUrl} />
-            <AnswerOptions question={questions[getIndex(params)]} dispatch={dispatch} history={history} index={getIndex(params)} totalQuestion={questions.length}/>
-            <SubmitActions onSkipQuestionClicked={() => {
-                dispatch(onSkipQuestionClicked(questions[getIndex(params)].id));
-                Utils.redirectToNextQuestion(history, getIndex(params), questions.length);
-            }}/>
-        </div>
-        <div className="col-md-4 col-sm-12">
-            <ScoreBoard questions={questions} />
-        </div>
-    </div>
-    );
+    if(questions.length == 0){
+        return(
+            <div className="row">
+                <div className="col-md-8 col-sm-12">
+                    Congrats!!! You have solved all questions from our question Bank.
+                    <p><a className="btn btn-primary" href="http://localhost:8793/subject">Go to Home Page</a></p>
+                </div>
+            </div>
+        );
+    } else{
+        return(
+            <div className="row">
+                <div className="col-md-8 col-sm-12">
+                    <LoginRedirectMonitor />
+                    <Timer />
+                    <QuestionPic picUrl={questions[getIndex(params)].picUrl} />
+                    <AnswerOptions question={questions[getIndex(params)]} dispatch={dispatch} history={history} index={getIndex(params)} totalQuestion={questions.length}/>
+                    <SubmitActions onSkipQuestionClicked={() => {
+                        dispatch(onSkipQuestionClicked(questions[getIndex(params)].id));
+                        Utils.redirectToNextQuestion(history, getIndex(params), questions.length);
+                    }}/>
+                </div>
+                <div className="col-md-4 col-sm-12">
+                    <ScoreBoard questions={questions} />
+                </div>
+            </div>
+        );
+    }
 };
 
 function getIndex(params){
