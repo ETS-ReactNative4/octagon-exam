@@ -9,6 +9,7 @@ import {Provider} from 'react-redux'
 import thunk from 'redux-thunk';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import * as RestClient from './api/RestClient'
+import ExamResult from './components/ExamResult'
 
 
 let predefineStateFromServer = {
@@ -71,7 +72,11 @@ RestClient.getRandomQuestions(10)
         ReactDOM.render(
             <Provider store={store}>
                 <Router>
-                     <Route path="/:index?" component={App} />
+                    <Switch>
+                        <Route path="/question/:index?" component={App} />
+                        <Route path="/result" component={ExamResult} />
+                        <Route path="/" component={App} />
+                    </Switch>
                 </Router>
             </Provider>
             , document.getElementById('root'));
