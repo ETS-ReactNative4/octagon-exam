@@ -47,9 +47,10 @@ function authError(){
 }
 
 export let getRandomQuestions = (limit) => {
-        return fetch("http://localhost:8793/api/questions/" + limit + "/subject/1/etoken/?encryptedUserId=" + defaultValueUser(),
+        return fetch("http://localhost:8793/api/questions/" + limit + "/subject/1/etoken/",
             {
                 headers: {
+                    "encryptedUserId" : defaultValueUser()
                 }
             })
             .then(response => {
