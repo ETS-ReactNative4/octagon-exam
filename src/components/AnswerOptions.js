@@ -14,7 +14,10 @@ export default class AnswerOptions extends Component {
 
     pushAnswer(value){
         const {dispatch, question, history, index, totalQuestion} = this.props;
-        dispatch(QuestionActions.markAnswerTest(question, value));
+        if (question.selectedOption === null) {
+            dispatch(QuestionActions.markAnswerTest(question, value));
+        }
+
       //  Utils.redirectToNextQuestion(history, index, totalQuestion);
 
 
@@ -30,7 +33,7 @@ export default class AnswerOptions extends Component {
                     <tbody>
                         {options.map((option) =>
                             <tr>
-                                <th scope="row"><input type="radio" name="answer" value={option} checked={question.selectedOption === option} onClick={() => {this.pushAnswer(option)}}/></th>
+                                <th scope="row"><input type="radio" name="answer" value={option} disabled={question.selectedOption !== null} checked={question.selectedOption === option} onClick={() => {this.pushAnswer(option)}}/></th>
                                 <td className="col-md-1">Option {option} {(option === question.correctOption) ?  <span className="text text-success bolder small margin margin-left-25"> >> Correct</span> : '' }
                                     {(option === question.selectedOption && question.correctOption !== question.selectedOption) ?  <span className="text text-danger small margin-left-25"> x Wrong Answer</span> : '' }
                                 </td>
