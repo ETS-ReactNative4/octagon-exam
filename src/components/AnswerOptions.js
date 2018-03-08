@@ -27,8 +27,8 @@ export default class AnswerOptions extends Component {
         const {question} = this.props;
         const options = ['A', 'B', 'C', 'D'];
         return(
-            <div>
-                <p className="text-muted">(Please Select one Option)</p>
+            <div className="margin-top-25">
+                <div className="text-muted">(Please Select one Option)</div>
                 <table className="table table-striped table-bordered  table-responsive">
                     <tbody>
                         {options.map((option) =>
