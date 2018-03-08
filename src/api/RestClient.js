@@ -21,7 +21,7 @@ export let matchAnswer = (question, dispatch) => {
             .then(json => {
                 console.log(json);
                 console.log("jwtToken " + TokenHolder.getJwtToken());
-                return json} );
+                return json.success} );
 };
 
 export let noteQuestionDurationTime = (count, questionId, dispatch, action) => {
@@ -70,7 +70,7 @@ export function defaultValueUser() {
     if(getParameterByName("u") != null){
         return getParameterByName("u");
     }
-    return 1;
+    return 0;
 }
 /*
 export let getJwtToken = () => {

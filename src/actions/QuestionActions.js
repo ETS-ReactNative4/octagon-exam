@@ -14,8 +14,12 @@ export function markAnswer(id, selectedOption){
     return { type: ActionTypes.MARK_ANSWER, id: id, selectedOption: selectedOption}
 }
 
-export function markAnswerCorrect(id){
-    return { type: ActionTypes.MARK_ANSWER_CORRECT, id: id}
+export function markAnswerCorrect(id, correctOption){
+    return { type: ActionTypes.MARK_ANSWER_CORRECT, id: id, correctOption : correctOption}
+}
+
+export function markAnswerWrong(id, correctOption){
+    return { type: ActionTypes.MARK_ANSWER_WRONG, id: id, correctOption: correctOption}
 }
 
 export function markAnswerTest(question, selectedOption) {
@@ -27,10 +31,10 @@ export function markAnswerTest(question, selectedOption) {
 
         RestClient.noteQuestionDurationTime(questionDuration.counter, question.id, dispatch, "ANSWERED");
         RestClient.matchAnswer(question, dispatch).then((output) => {
-                if(output){
-                    dispatch(markAnswerCorrect(question.id));
-
+                if(question.selectedOption === output){
+                    dispatch(markAnswerCorrect(question.id, output));
                 } else {
+                    dispatch(markAnswerWrong(question.id, output));
                   //  alert("wrong answer");
                 }
             }

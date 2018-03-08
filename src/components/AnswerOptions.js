@@ -15,38 +15,27 @@ export default class AnswerOptions extends Component {
     pushAnswer(value){
         const {dispatch, question, history, index, totalQuestion} = this.props;
         dispatch(QuestionActions.markAnswerTest(question, value));
-        Utils.redirectToNextQuestion(history, index, totalQuestion);
-        /*if(totalQuestion > (index + 1)){
-            history.push("/" + parseInt(parseInt(index) + 1));
-        } else{
-            history.push("/");
-        }*/
+      //  Utils.redirectToNextQuestion(history, index, totalQuestion);
+
 
     }
 
     render(){
         const {question} = this.props;
+        const options = ['A', 'B', 'C', 'D'];
         return(
             <div>
                 <p className="text-muted">(Please Select one Option)</p>
                 <table className="table table-striped table-bordered  table-responsive">
                     <tbody>
-                        <tr>
-                            <th scope="row"> <input type="radio" name="answer" value="A" checked={question.selectedOption === "A"} onClick={() => {this.pushAnswer("A")}}/></th>
-                            <td className="col-md-1">Option A</td>
-                        </tr>
-                        <tr>
-                            <th scope="row"><input type="radio" name="answer" value="B" checked={question.selectedOption === "B"} onClick={() => {this.pushAnswer("B")}}/></th>
-                            <td className="col-md-1">Option B</td>
-                        </tr>
-                        <tr>
-                            <th scope="row"><input type="radio" name="answer" value="C" checked={question.selectedOption === "C"} onClick={() => {this.pushAnswer("C")}}/></th>
-                            <td className="col-md-1">Option C</td>
-                        </tr>
-                        <tr>
-                            <th scope="row"><input type="radio" name="answer" value="D" checked={question.selectedOption === "D"} onClick={() => {this.pushAnswer("D")}}/></th>
-                            <td className="col-md-1">Option D</td>
-                        </tr>
+                        {options.map((option) =>
+                            <tr>
+                                <th scope="row"><input type="radio" name="answer" value={option} checked={question.selectedOption === option} onClick={() => {this.pushAnswer(option)}}/></th>
+                                <td className="col-md-1">Option {option} {(option === question.correctOption) ?  <span className="text text-success bolder small margin margin-left-25"> >> Correct</span> : '' }
+                                    {(option === question.selectedOption && question.correctOption !== question.selectedOption) ?  <span className="text text-danger small margin-left-25"> x Wrong Answer</span> : '' }
+                                </td>
+                            </tr>
+                        )}
                     </tbody>
                 </table>
             </div>
