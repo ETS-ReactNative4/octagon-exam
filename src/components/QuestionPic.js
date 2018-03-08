@@ -10,7 +10,7 @@ export default class QuestionPic extends Component{
         const {picUrl} = this.props;
         return (
             <div>
-                <img src={"/images/question/" + picUrl} />
+                <img className="img-fluid" src={"/images/question/" + picUrl} />
                {/* Me Pic {picUrl} here*/}
             </div>
         )
