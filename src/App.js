@@ -20,7 +20,7 @@ const App = ({match: { params }, history, questions, onSkipQuestionClicked, disp
             <div className="row">
                 <div className="col-md-8 col-sm-12">
                     Congrats!!! You have solved all questions from our question Bank.
-                    <p><a className="btn btn-primary" href="http://localhost:8793/subject">Go to Home Page</a></p>
+                    <p><a className="btn btn-primary" href="http://localhost:8793/student/dashboard">Go to Home Page</a></p>
                 </div>
             </div>
         );

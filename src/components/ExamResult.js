@@ -7,7 +7,7 @@ const ExamResult = ({questions, dispatch}) => {
             <div>
                 <div>
                     Thank you for answering questions.
-                    <p><a className="btn btn-primary" href="http://localhost:8793/subject">Go to Home Page</a></p>
+                    <p><a className="btn btn-primary" href="http://localhost:8793/student/dashboard">Go to Home Page</a></p>
                 </div>
                 <ScoreBoard questions={questions} />
             </div>
