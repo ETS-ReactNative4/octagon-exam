@@ -1,9 +1,10 @@
 import fetch from 'cross-fetch'
 import * as ActionTypes from "../constants/ActionTypes";
 import * as TokenHolder from "../utils/TokenHolder";
+import * as Configuration from "../utils/Configuration";
 
 export let matchAnswer = (question, dispatch) => {
-    return fetch("http://localhost:8793/api/question/" + question.id + "/answer/" + question.selectedOption,
+    return fetch(Configuration.serverUrl() + "/api/question/" + question.id + "/answer/" + question.selectedOption,
         {
             headers: {
                 "Authorization": "Bearer " + TokenHolder.getJwtToken(),
@@ -25,7 +26,7 @@ export let matchAnswer = (question, dispatch) => {
 };
 
 export let noteQuestionDurationTime = (count, questionId, dispatch, action) => {
-    return fetch("http://localhost:8793/api/question/" + questionId + "/time-count/" + count + "/action/" + action,
+    return fetch(Configuration.serverUrl() + "/api/question/" + questionId + "/time-count/" + count + "/action/" + action,
         {
             headers: {
                 "Authorization": "Bearer " + TokenHolder.getJwtToken(),
@@ -47,7 +48,7 @@ function authError(){
 }
 
 export let getRandomQuestions = (limit) => {
-        return fetch("http://localhost:8793/api/questions/" + limit + "/subject/1/etoken/",
+        return fetch(Configuration.serverUrl() + "/api/questions/" + limit + "/subject/1/etoken/",
             {
                 headers: {
                     "encryptedUserId" : defaultValueUser()

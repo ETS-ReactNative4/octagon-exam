@@ -1,8 +1,9 @@
 import { connect } from 'react-redux'
+import * as Configuration from "../utils/Configuration"
 
 const LoginRedirectMonitor = ({dispatch, authenticated}) => {
     if(!authenticated){
-        window.location = "http://google.com";
+        window.location = Configuration.serverUrl() + "/login";
     }
     return null;
 };
