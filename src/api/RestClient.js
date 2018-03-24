@@ -47,11 +47,13 @@ function authError(){
     return { type: ActionTypes.AUTHENTICATION_ERROR}
 }
 
-export let getRandomQuestions = (limit) => {
-        return fetch(Configuration.serverUrl() + "/api/questions/" + limit + "/subject/1/etoken/",
+export let getRandomQuestions = () => {
+        return fetch(Configuration.serverUrl() + "/api/questions/subject/etoken/",
             {
                 headers: {
-                    "encryptedUserId" : defaultValueUser()
+                    "encryptedUserId" : defaultValueUser(),
+                    "examSettingsDtoEncrypted" : defaultValueExamSettings()
+
                 }
             })
             .then(response => {
@@ -70,6 +72,13 @@ export let getRandomQuestions = (limit) => {
 export function defaultValueUser() {
     if(getParameterByName("u") != null){
         return getParameterByName("u");
+    }
+    return 0;
+}
+
+export function defaultValueExamSettings() {
+    if(getParameterByName("s") != null){
+        return getParameterByName("s");
     }
     return 0;
 }

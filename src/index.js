@@ -47,7 +47,7 @@ let predefineStateFromServer = {
 
 };
 
-RestClient.getRandomQuestions(10)
+RestClient.getRandomQuestions()
     .then(json => {
         const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
         const store = createStore(reducer, json, composeEnhancers(
