@@ -10,7 +10,7 @@ const Timer = ({dispatch, start = false, counter = 0}) => {
         dispatch(TimerActions.setStartToFalse());
     }
     return (
-        <div>{counter}</div>
+        <div><strong>Per Question Time:</strong> {counter}</div>
     );
 };
 
