@@ -6,7 +6,7 @@ const SubmitActions = ({onSkipQuestionClicked}) => (
         <p>
 
         </p>
-        <button className="btn btn-warning" onClick={onSkipQuestionClicked}>Skip Question</button>
+        <button className="btn btn-warning" onClick={onSkipQuestionClicked}>Next</button>
         <p className="margin-top-50">
 
         </p>

@@ -1,10 +1,9 @@
 import fetch from 'cross-fetch'
 import * as ActionTypes from "../constants/ActionTypes";
 import * as TokenHolder from "../utils/TokenHolder";
-import * as Configuration from "../utils/Configuration";
 
 export let matchAnswer = (question, dispatch) => {
-    return fetch(Configuration.serverUrl() + "/api/question/" + question.id + "/answer/" + question.selectedOption,
+    return fetch(process.env.REACT_APP_JAVA_APP_URL + "/api/question/" + question.id + "/answer/" + question.selectedOption,
         {
             headers: {
                 "Authorization": "Bearer " + TokenHolder.getJwtToken(),
@@ -26,7 +25,7 @@ export let matchAnswer = (question, dispatch) => {
 };
 
 export let noteQuestionDurationTime = (count, questionId, dispatch, action) => {
-    return fetch(Configuration.serverUrl() + "/api/question/" + questionId + "/time-count/" + count + "/action/" + action,
+    return fetch(process.env.REACT_APP_JAVA_APP_URL + "/api/question/" + questionId + "/time-count/" + count + "/action/" + action,
         {
             headers: {
                 "Authorization": "Bearer " + TokenHolder.getJwtToken(),
@@ -48,7 +47,7 @@ function authError(){
 }
 
 export let getRandomQuestions = () => {
-        return fetch(Configuration.serverUrl() + "/api/questions/subject/etoken/",
+        return fetch(process.env.REACT_APP_JAVA_APP_URL + "/api/questions/subject/etoken/",
             {
                 headers: {
                     "encryptedUserId" : defaultValueUser(),

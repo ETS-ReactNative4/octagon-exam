@@ -12,17 +12,15 @@ import {connect} from 'react-redux';
 import * as QuestionActions from './actions/QuestionActions'
 import * as Utils from "./utils/Utils";
 import * as RestClient from './api/RestClient'
-import * as Configuration from "./utils/Configuration";
 
 
 const App = ({match: { params }, history, questions, onSkipQuestionClicked, dispatch}) => {
-    let serverUrl = Configuration.serverUrl();
     if(questions.length == 0){
         return(
             <div className="row">
                 <div className="col-md-8 col-sm-12">
-                    Congrats!!! You have solved all questions from our question Bank.
-                    <p><a className="btn btn-primary" href={serverUrl + "/student/dashboard"}>Go to Home Page</a></p>
+                    No questions found.
+                    <p><a className="btn btn-primary" href={process.env.REACT_APP_JAVA_APP_URL + "/student/dashboard"}>Go to Home Page</a></p>
                 </div>
             </div>
         );

@@ -1,9 +1,8 @@
 import { connect } from 'react-redux'
-import * as Configuration from "../utils/Configuration"
 
 const LoginRedirectMonitor = ({dispatch, authenticated}) => {
     if(!authenticated){
-        window.location = Configuration.serverUrl() + "/login";
+        window.location = process.env.REACT_APP_JAVA_APP_URL + "/login";
     }
     return null;
 };
