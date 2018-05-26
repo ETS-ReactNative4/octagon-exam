@@ -37,6 +37,9 @@ let predefineStateFromServer = {
             'answerCorrect': null
         }
     ],
+    "settings" : {
+        "multipleAnswers" : true,
+    },
     "auth": {
         "userAuthenticated" : true,
     },

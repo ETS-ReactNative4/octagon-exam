@@ -14,7 +14,7 @@ import * as Utils from "./utils/Utils";
 import * as RestClient from './api/RestClient'
 
 
-const App = ({match: { params }, history, questions, onSkipQuestionClicked, dispatch}) => {
+const App = ({match: { params }, history, questions, settings, onSkipQuestionClicked, dispatch}) => {
     if(questions.length == 0){
         return(
             <div className="row">
@@ -31,11 +31,11 @@ const App = ({match: { params }, history, questions, onSkipQuestionClicked, disp
                     <LoginRedirectMonitor />
                     <Timer />
                     <QuestionPic picUrl={questions[getIndex(params)].picUrl} />
-                    <AnswerOptions question={questions[getIndex(params)]} dispatch={dispatch} history={history} index={getIndex(params)} totalQuestion={questions.length}/>
+                    <AnswerOptions question={questions[getIndex(params)]} dispatch={dispatch} history={history} index={getIndex(params)} totalQuestion={questions.length} settings={settings}/>
                     <SubmitActions onSkipQuestionClicked={() => {
                         dispatch(onSkipQuestionClicked(questions[getIndex(params)].id));
                         Utils.redirectToNextQuestion(history, getIndex(params), questions.length);
-                    }}/>
+                    }} settings={settings}/>
                 </div>
                 <div className="col-md-4 col-sm-12">
                     <ScoreBoard questions={questions} />
@@ -51,6 +51,7 @@ function getIndex(params){
 
 App.propTypes = {
     questions: PropTypes.array.isRequired,
+    settings: PropTypes.object.isRequired,
     onSkipQuestionClicked: PropTypes.func.isRequired,
     dispatch: PropTypes.func.isRequired
 };
@@ -58,6 +59,7 @@ App.propTypes = {
 
 
 const mapStateToProps = state => ({
+    settings: state.settings,
     questions: state.questions
 });
 

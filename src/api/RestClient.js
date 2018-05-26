@@ -60,10 +60,11 @@ export let getRandomQuestions = () => {
                 return response.json();
             }, error => console.log('An error occurred. questions', error))
             .then(json => {
-                console.log("questions suc"  + json);
+                console.log("questions suc"  + JSON.stringify(json));
               //  console.log(json);
                 json.auth = { userAuthenticated : true};
                 json.questionDuration = {start: true};
+             //   json.settings = {multipleAnswers: true};
                 return json
             });
 };

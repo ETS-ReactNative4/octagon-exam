@@ -9,11 +9,12 @@ export default class AnswerOptions extends Component {
         dispatch: PropTypes.func.isRequired,
         history: PropTypes.object.isRequired,
         index: PropTypes.number.isRequired,
-        totalQuestion: PropTypes.number.isRequired
+        totalQuestion: PropTypes.number.isRequired,
+        settings: PropTypes.object
     };
 
     pushAnswer(value){
-        const {dispatch, question, history, index, totalQuestion} = this.props;
+        const {dispatch, question, history, index, totalQuestion, settings} = this.props;
         if (question.selectedOption === null) {
             dispatch(QuestionActions.markAnswerTest(question, value));
         }
@@ -23,8 +24,10 @@ export default class AnswerOptions extends Component {
 
     }
 
+
+
     render(){
-        const {question} = this.props;
+        const {question, settings} = this.props;
         const options = ['A', 'B', 'C', 'D'];
         return(
             <div className="margin-top-25">
@@ -33,7 +36,13 @@ export default class AnswerOptions extends Component {
                     <tbody>
                         {options.map((option) =>
                             <tr>
-                                <th scope="row"><input type="radio" name="answer" value={option} disabled={question.selectedOption !== null} checked={question.selectedOption === option} onClick={() => {this.pushAnswer(option)}}/></th>
+                                <th scope="row">
+                                    {(settings.multipleAnswers) ?
+                                        <input type="checkbox" name="answer" value={option} />
+                                     :
+                                        <input type="radio" name="answer" value={option} disabled={question.selectedOption !== null} checked={question.selectedOption === option} onClick={() => {this.pushAnswer(option)}}/>
+                                    }
+                                </th>
                                 <td className="col-md-1">Option {option} {(option === question.correctOption) ?  <span className="text text-success bolder small margin margin-left-25"> >> Correct</span> : '' }
                                     {(option === question.selectedOption && question.correctOption !== question.selectedOption) ?  <span className="text text-danger small margin-left-25"> x Wrong Answer</span> : '' }
                                 </td>
