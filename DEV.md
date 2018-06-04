@@ -19,3 +19,15 @@ npm install --save redux-thunk
 
 npm install --save cross-fetch
 
+
+3
+for fake backend server
+https://github.com/micromata/http-fake-backend
+
+
+4
+//dislable this for fake server to work
+headers: {
+                    "encryptedUserId" : defaultValueUser(),
+                    "examSettingsDtoEncrypted" : defaultValueExamSettings()
+ }

@@ -10,8 +10,8 @@ export function skipQuestion (questionId) {
        return ({ type: ActionTypes.SKIP_QUESTION, id: questionId});
     };
 }
-export function markAnswer(id, selectedOption){
-    return { type: ActionTypes.MARK_ANSWER, id: id, selectedOption: selectedOption}
+export function markAnswer(id, selectedValue, isChecked = true){
+    return { type: ActionTypes.MARK_ANSWER, id: id, selectedValue: selectedValue, isChecked: isChecked}
 }
 
 export function markAnswerCorrect(id, correctOption){
@@ -43,6 +43,11 @@ export function markAnswerTest(question, selectedOption) {
     }
 }
 
-/*
-export const addTodo = text => ({ type: types.ADD_TODO, text })
-export const deleteTodo = id => ({ type: types.DELETE_TODO, id })*/
+export function pushCheckboxAnswer(question, selectedValue, isChecked){
+    return (dispatch, getState) => {
+        dispatch(markAnswer(question.id, selectedValue, isChecked));
+    }
+}
+
+
+

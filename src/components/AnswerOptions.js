@@ -13,18 +13,17 @@ export default class AnswerOptions extends Component {
         settings: PropTypes.object
     };
 
-    pushAnswer(value){
+    pushAnswer(value, event){
         const {dispatch, question, history, index, totalQuestion, settings} = this.props;
-        if (question.selectedOption === null) {
+        if(settings.multipleAnswers){
+            console.log("selected? ", event.target.checked);
+            dispatch(QuestionActions.pushCheckboxAnswer(question, value, event.target.checked));
+        }else if (question.selectedOption.length === 0) {
             dispatch(QuestionActions.markAnswerTest(question, value));
         }
 
       //  Utils.redirectToNextQuestion(history, index, totalQuestion);
-
-
     }
-
-
 
     render(){
         const {question, settings} = this.props;
@@ -38,9 +37,9 @@ export default class AnswerOptions extends Component {
                             <tr>
                                 <th scope="row">
                                     {(settings.multipleAnswers) ?
-                                        <input type="checkbox" name="answer" value={option} />
+                                        <input type="checkbox" name="answer" value={option} onClick={(event) => {this.pushAnswer(option, event)}}/>
                                      :
-                                        <input type="radio" name="answer" value={option} disabled={question.selectedOption !== null} checked={question.selectedOption === option} onClick={() => {this.pushAnswer(option)}}/>
+                                        <input type="radio" name="answer" value={option} disabled={question.selectedOption.length > 0} checked={question.selectedOption === option} onClick={() => {this.pushAnswer(option)}}/>
                                     }
                                 </th>
                                 <td className="col-md-1">Option {option} {(option === question.correctOption) ?  <span className="text text-success bolder small margin margin-left-25"> >> Correct</span> : '' }

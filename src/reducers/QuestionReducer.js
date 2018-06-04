@@ -13,10 +13,20 @@ const initialState = [
 export default function QuestionReducer(state = [], action) {
     switch (action.type) {
         case "MARK_ANSWER" :
-            return state.map(answer =>
-                answer.id === action.id
-                    ? {...answer, isAnswered: true, selectedOption: action.selectedOption}
-                    : answer);
+            return state.map(answer => {
+                if(answer.id === action.id){
+                    const savedOptions = new Set(answer.selectedOption);
+                    if(action.isChecked){
+                        savedOptions.add(action.selectedValue);
+                    } else {
+                        savedOptions.delete(action.selectedValue);
+                    }
+
+                    return {...answer, isAnswered: true,  selectedOption: [...savedOptions]}
+                } else {
+                    return answer;
+                }
+            });
         case ActionTypes.SKIP_QUESTION :
          //   alert("SKIP_QUESTION " + action.id);
             return state.map(question =>

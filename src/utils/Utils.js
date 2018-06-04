@@ -8,3 +8,7 @@ export function redirectToNextQuestion(history, index, totalQuestion){
         //window.location = "http://localhost:8793/daily/exam/result";
     }
 }
+
+export function answerMatches(selectedOptions, correctOptions){
+    return correctOptions.sort().toString() === selectedOptions.sort().toString();
+}

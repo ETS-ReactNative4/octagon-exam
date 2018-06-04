@@ -2,14 +2,23 @@ import React, {Component} from 'react'
 import PropTypes from 'prop-types'
 import * as QuestionActions from "../actions/QuestionActions";
 
-const SubmitActions = ({onSkipQuestionClicked, settings}) => (
+const SubmitActions = ({onSkipQuestionClicked, settings}) => {
+    function submitAnswer(event){
+        console.log( event.target.name);
+        /* const {question} = this.props;
+         if (question.selectedOption === null) {
+            // dispatch(QuestionActions.markAnswerTest(question, value));
+         }*/
+    }
+
+    return(
     <div>
         <p>
 
         </p>
         {settings.multipleAnswers
             ?
-            <button className="btn btn-success" onClick={submitAnswer()}>Submit Answer</button>
+            <button className="btn btn-success" name="horror" onClick={submitAnswer}>Submit Answer</button>
             :
             <button className="btn btn-warning" onClick={onSkipQuestionClicked}>Next</button>
         }
@@ -17,14 +26,12 @@ const SubmitActions = ({onSkipQuestionClicked, settings}) => (
 
         </p>
     </div>
-);
+    )
+};
 
-function submitAnswer(value){
-    const {dispatch, question} = this.props;
-    if (question.selectedOption === null) {
-        dispatch(QuestionActions.markAnswerTest(question, value));
-    }
-}
+
+
+
 
 SubmitActions.propTypes = {
     onSkipQuestionClicked: PropTypes.func.isRequired,
