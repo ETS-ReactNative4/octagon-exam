@@ -14,12 +14,9 @@ const SubmitActions = ({onSkipQuestionClicked, settings, dispatch, question}) =>
 
     return(
     <div>
-        <p>
-
-        </p>
         {settings.multipleAnswers
             ?
-            <button className="btn btn-success" name="horror" onClick={submitAnswer}>Submit Answer</button>
+            <button className="btn btn-success" name="horror" disabled={question.selectedOption === null ? true : false} onClick={submitAnswer}>Submit Answer</button>
             :
             <button className="btn btn-warning" onClick={onSkipQuestionClicked}>Next</button>
         }
