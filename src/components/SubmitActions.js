@@ -2,9 +2,10 @@ import React, {Component} from 'react'
 import PropTypes from 'prop-types'
 import * as QuestionActions from "../actions/QuestionActions";
 
-const SubmitActions = ({onSkipQuestionClicked, settings}) => {
+const SubmitActions = ({onSkipQuestionClicked, settings, dispatch, question}) => {
     function submitAnswer(event){
         console.log( event.target.name);
+        dispatch(QuestionActions.submitCheckboxAnswer(question));
         /* const {question} = this.props;
          if (question.selectedOption === null) {
             // dispatch(QuestionActions.markAnswerTest(question, value));
@@ -36,6 +37,8 @@ const SubmitActions = ({onSkipQuestionClicked, settings}) => {
 SubmitActions.propTypes = {
     onSkipQuestionClicked: PropTypes.func.isRequired,
     settings: PropTypes.object.isRequired,
+    question: PropTypes.object.isRequired,
+    dispatch: PropTypes.func.isRequired
 };
 
 export default SubmitActions;

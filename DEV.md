@@ -25,9 +25,11 @@ for fake backend server
 https://github.com/micromata/http-fake-backend
 
 
-4
 //dislable this for fake server to work
 headers: {
                     "encryptedUserId" : defaultValueUser(),
                     "examSettingsDtoEncrypted" : defaultValueExamSettings()
  }
+ 
+ //then do
+ npm run start:dev

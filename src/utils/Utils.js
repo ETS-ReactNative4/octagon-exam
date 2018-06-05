@@ -12,3 +12,7 @@ export function redirectToNextQuestion(history, index, totalQuestion){
 export function answerMatches(selectedOptions, correctOptions){
     return correctOptions.sort().toString() === selectedOptions.sort().toString();
 }
+
+export function answerContains(selectedOption, correctOptions){
+    return correctOptions.indexOf(selectedOption) >= 0;
+}

@@ -35,7 +35,7 @@ const App = ({match: { params }, history, questions, settings, onSkipQuestionCli
                     <SubmitActions onSkipQuestionClicked={() => {
                         dispatch(onSkipQuestionClicked(questions[getIndex(params)].id));
                         Utils.redirectToNextQuestion(history, getIndex(params), questions.length);
-                    }} settings={settings}/>
+                    }} dispatch={dispatch} settings={settings} question={questions[getIndex(params)]}/>
                 </div>
                 <div className="col-md-4 col-sm-12">
                     <ScoreBoard questions={questions} />

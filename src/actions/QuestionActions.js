@@ -1,6 +1,7 @@
 import * as ActionTypes from "../constants/ActionTypes";
 import * as RestClient from "../api/RestClient";
 import * as TimerActions from "./TimerActions";
+import * as Utils from "../utils/Utils";
 
 export function skipQuestion (questionId) {
     return (dispatch, getState) => {
@@ -46,6 +47,25 @@ export function markAnswerTest(question, selectedOption) {
 export function pushCheckboxAnswer(question, selectedValue, isChecked){
     return (dispatch, getState) => {
         dispatch(markAnswer(question.id, selectedValue, isChecked));
+    }
+}
+
+export function submitCheckboxAnswer(question){
+    return (dispatch, getState) => {
+        const { questionDuration } = getState();
+       // RestClient.noteQuestionDurationTime(questionDuration.counter, question.id, dispatch, "ANSWERED"); //TODO nowshad reactivate
+        RestClient.matchAnswer(question, dispatch).then((output) => {
+                if(Utils.answerMatches(question.selectedOption, output)){
+                    console.log("Answer is correct");
+                    dispatch(markAnswerCorrect(question.id, output));
+                } else {
+                    console.log("wrong is wrong");
+                    dispatch(markAnswerWrong(question.id, output));
+                    //  alert("wrong answer");
+                }
+            }
+        );
+        dispatch(TimerActions.resetPerQuestionTimer());
     }
 }
 

@@ -28,6 +28,7 @@ export default class AnswerOptions extends Component {
     render(){
         const {question, settings} = this.props;
         const options = ['A', 'B', 'C', 'D'];
+
         return(
             <div className="margin-top-25">
                 <div className="text-muted">(Please Select one Option)</div>
@@ -42,8 +43,7 @@ export default class AnswerOptions extends Component {
                                         <input type="radio" name="answer" value={option} disabled={question.selectedOption.length > 0} checked={question.selectedOption === option} onClick={() => {this.pushAnswer(option)}}/>
                                     }
                                 </th>
-                                <td className="col-md-1">Option {option} {(option === question.correctOption) ?  <span className="text text-success bolder small margin margin-left-25"> >> Correct</span> : '' }
-                                    {(option === question.selectedOption && question.correctOption !== question.selectedOption) ?  <span className="text text-danger small margin-left-25"> x Wrong Answer</span> : '' }
+                                <td className="col-md-1">Option {option}  <MarkRightWrong option={option} question={question} />
                                 </td>
                             </tr>
                         )}
@@ -52,4 +52,24 @@ export default class AnswerOptions extends Component {
             </div>
         )
     }
+}
+
+function MarkRightWrong(props){
+    const {question, option} = props;
+    let selection = true;
+    if(question.correctOption === undefined){
+        selection = false;
+    }
+
+    console.log("selection", selection);
+    if(selection){
+        console.log("selection: ", selection, " answercontains: ", Utils.answerContains(option, question.correctOption), " for wrong: ", question.selectedOption.indexOf(option) >= 0);
+    }
+
+    if(selection && Utils.answerContains(option, question.correctOption)){
+        return <span className="text text-success bolder small margin margin-left-25"> >> Correct</span>
+    } else if(selection && question.selectedOption.indexOf(option) >= 0){
+        return <span className="text text-danger small margin-left-25"> x Wrong Answer</span>
+    }
+    return null;
 }

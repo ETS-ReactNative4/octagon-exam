@@ -36,13 +36,13 @@ export default function QuestionReducer(state = [], action) {
         case ActionTypes.MARK_ANSWER_CORRECT:
             return state.map(question =>
                 question.id === action.id
-                ? {...question, answerCorrect: true, correctOption: action.correctOption}
+                ? {...question, answerCorrect: true, correctOption: [...action.correctOption]}
                 : question
             );
         case ActionTypes.MARK_ANSWER_WRONG:
             return state.map(question =>
                 question.id === action.id
-                ? {...question, answerCorrect: false, correctOption: action.correctOption}
+                ? {...question, answerCorrect: false, correctOption: [...action.correctOption]}
                 : question
             );
         default:
