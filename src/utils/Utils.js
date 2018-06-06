@@ -14,5 +14,8 @@ export function answerMatches(selectedOptions, correctOptions){
 }
 
 export function answerContains(selectedOption, correctOptions){
+    if(correctOptions == null){
+        return false;
+    }
     return correctOptions.indexOf(selectedOption) >= 0;
 }

@@ -7,11 +7,11 @@ export default class ScoreBoard extends Component {
     };
 
     correctCount(questions) {
-        return questions.filter(question => question.answerCorrect && question.selectedOption != null).length;
+        return questions.filter(question => question.answerCorrect).length;
     }
 
     wrongCount(questions) {
-        return questions.filter(question => !question.answerCorrect && question.selectedOption != null).length;
+        return questions.filter(question => question.answerCorrect !== null && !question.answerCorrect).length;
     }
 
     percentageCorrect(questions) {

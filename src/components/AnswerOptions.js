@@ -38,7 +38,7 @@ export default class AnswerOptions extends Component {
                             <tr>
                                 <th scope="row">
                                     {(settings.multipleAnswers) ?
-                                        <input type="checkbox" name="answer" value={option} onClick={(event) => {this.pushAnswer(option, event)}}/>
+                                        <input type="checkbox" name="answer" value={option} checked={question.selectedOption !== null && question.selectedOption.indexOf(option) >= 0} onClick={(event) => {this.pushAnswer(option, event)}}/>
                                      :
                                         <input type="radio" name="answer" value={option} disabled={question.selectedOption.length > 0} checked={question.selectedOption === option} onClick={() => {this.pushAnswer(option)}}/>
                                     }

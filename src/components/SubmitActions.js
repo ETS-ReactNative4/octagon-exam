@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import PropTypes from 'prop-types'
 import * as QuestionActions from "../actions/QuestionActions";
+import * as Utils from "../utils/Utils";
 
 const SubmitActions = ({onSkipQuestionClicked, settings, dispatch, question}) => {
     function submitAnswer(event){
@@ -16,7 +17,7 @@ const SubmitActions = ({onSkipQuestionClicked, settings, dispatch, question}) =>
     <div>
         {settings.multipleAnswers
             ?
-            <button className="btn btn-success" name="horror" disabled={question.selectedOption === null ? true : false} onClick={submitAnswer}>Submit Answer</button>
+            <MultipleAnswersSubmitButtons question={question} submitAnswer={submitAnswer} onSkipQuestionClicked={onSkipQuestionClicked}/>
             :
             <button className="btn btn-warning" onClick={onSkipQuestionClicked}>Next</button>
         }
@@ -26,6 +27,14 @@ const SubmitActions = ({onSkipQuestionClicked, settings, dispatch, question}) =>
     </div>
     )
 };
+
+function MultipleAnswersSubmitButtons(props){
+    const {submitAnswer, question, onSkipQuestionClicked} = props;
+    if(question.correctOption == null){
+        return <button className="btn btn-success" name="horror" disabled={question.selectedOption === null ? true : false} onClick={submitAnswer}>Submit Answer</button>
+    }
+    return <button className="btn btn-success" onClick={onSkipQuestionClicked}>Next</button>
+}
 
 
 
