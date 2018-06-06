@@ -21,7 +21,7 @@ export let matchAnswer = (question, dispatch) => {
             .then(json => {
                 console.log(json);
                 console.log("jwtToken " + TokenHolder.getJwtToken());
-                return json.success} );
+                return json} );
 };
 
 export let noteQuestionDurationTime = (count, questionId, dispatch, action) => {

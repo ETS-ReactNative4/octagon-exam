@@ -12,6 +12,7 @@ import {connect} from 'react-redux';
 import * as QuestionActions from './actions/QuestionActions'
 import * as Utils from "./utils/Utils";
 import * as RestClient from './api/RestClient'
+import AnswerExplanation from "./components/AnswerExplanation";
 
 
 const App = ({match: { params }, history, questions, settings, onSkipQuestionClicked, dispatch}) => {
@@ -32,6 +33,7 @@ const App = ({match: { params }, history, questions, settings, onSkipQuestionCli
                     <Timer />
                     <QuestionPic picUrl={questions[getIndex(params)].picUrl} />
                     <AnswerOptions question={questions[getIndex(params)]} dispatch={dispatch} history={history} index={getIndex(params)} totalQuestion={questions.length} settings={settings}/>
+                    <AnswerExplanation question={questions[getIndex(params)]} />
                     <SubmitActions onSkipQuestionClicked={() => {
                         dispatch(onSkipQuestionClicked(questions[getIndex(params)].id));
                         Utils.redirectToNextQuestion(history, getIndex(params), questions.length);

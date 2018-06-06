@@ -15,12 +15,12 @@ export function markAnswer(id, selectedValue, isChecked = true){
     return { type: ActionTypes.MARK_ANSWER, id: id, selectedValue: selectedValue, isChecked: isChecked}
 }
 
-export function markAnswerCorrect(id, correctOption){
-    return { type: ActionTypes.MARK_ANSWER_CORRECT, id: id, correctOption : correctOption}
+export function markAnswerCorrect(id, correctOption, explanation){
+    return { type: ActionTypes.MARK_ANSWER_CORRECT, id: id, correctOption : correctOption, explanation: explanation}
 }
 
-export function markAnswerWrong(id, correctOption){
-    return { type: ActionTypes.MARK_ANSWER_WRONG, id: id, correctOption: correctOption}
+export function markAnswerWrong(id, correctOption, explanation){
+    return { type: ActionTypes.MARK_ANSWER_WRONG, id: id, correctOption: correctOption, explanation: explanation}
 }
 
 export function markAnswerTest(question, selectedOption) {
@@ -31,12 +31,11 @@ export function markAnswerTest(question, selectedOption) {
         question.selectedOption = selectedOption; //hack
 
         RestClient.noteQuestionDurationTime(questionDuration.counter, question.id, dispatch, "ANSWERED");
-        RestClient.matchAnswer(question, dispatch).then((output) => {
-                if(question.selectedOption === output){
-                    dispatch(markAnswerCorrect(question.id, output));
+        RestClient.matchAnswer(question, dispatch).then((json) => {
+                if(question.selectedOption === json){
+                    dispatch(markAnswerCorrect(question.id, json.correctOption, json.explanation));
                 } else {
-                    dispatch(markAnswerWrong(question.id, output));
-                  //  alert("wrong answer");
+                    dispatch(markAnswerWrong(question.id, json.correctOption, json.explanation));
                 }
             }
         );
@@ -54,14 +53,11 @@ export function submitCheckboxAnswer(question){
     return (dispatch, getState) => {
         const { questionDuration } = getState();
        // RestClient.noteQuestionDurationTime(questionDuration.counter, question.id, dispatch, "ANSWERED"); //TODO nowshad reactivate
-        RestClient.matchAnswer(question, dispatch).then((output) => {
-                if(Utils.answerMatches(question.selectedOption, output)){
-                    console.log("Answer is correct");
-                    dispatch(markAnswerCorrect(question.id, output));
+        RestClient.matchAnswer(question, dispatch).then((json) => {
+                if(Utils.answerMatches(question.selectedOption, json.correctOption, json.explanation)){
+                    dispatch(markAnswerCorrect(question.id, json.correctOption, json.explanation));
                 } else {
-                    console.log("wrong is wrong");
-                    dispatch(markAnswerWrong(question.id, output));
-                    //  alert("wrong answer");
+                    dispatch(markAnswerWrong(question.id, json.correctOption, json.explanation));
                 }
             }
         );
