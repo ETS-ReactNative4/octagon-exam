@@ -62,9 +62,9 @@ function MarkRightWrong(props){
     }
 
     if(selection && Utils.answerContains(option, question.correctOption)){
-        return <span className="text text-success bolder small margin margin-left-25"> >> Correct</span>
+        return <span className="text text-success bolder small margin margin-left-25"> <i className="fa fa-check" aria-hidden="true" /> Correct</span>
     } else if(selection && question.selectedOption.indexOf(option) >= 0){
-        return <span className="text text-danger small margin-left-25"> x Wrong Answer</span>
+        return <span className="text text-danger small margin-left-25"> <i className="fa fa-times" aria-hidden="true"/> Wrong Answer</span>
     }
     return null;
 }
