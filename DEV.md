@@ -19,6 +19,7 @@ npm install --save redux-thunk
 
 npm install --save cross-fetch
 
+npm install react-chartjs-2 chart.js --save
 
 3
 for fake backend server

@@ -13,6 +13,7 @@ import * as QuestionActions from './actions/QuestionActions'
 import * as Utils from "./utils/Utils";
 import * as RestClient from './api/RestClient'
 import AnswerExplanation from "./components/AnswerExplanation";
+import PieChartTestAnalysis from "./components/PieChartTestAnalysis";
 
 
 const App = ({match: { params }, history, questions, settings, onSkipQuestionClicked, dispatch}) => {
@@ -41,6 +42,7 @@ const App = ({match: { params }, history, questions, settings, onSkipQuestionCli
                 </div>
                 <div className="col-md-4 col-sm-12">
                     <ScoreBoard questions={questions} />
+                    <PieChartTestAnalysis questions={questions}/>
                 </div>
             </div>
         );

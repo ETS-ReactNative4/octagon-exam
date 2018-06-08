@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import PropTypes from 'prop-types'
+import * as Utils from "../utils/Utils";
 
 export default class ScoreBoard extends Component {
     static propTypes = {
@@ -7,11 +8,11 @@ export default class ScoreBoard extends Component {
     };
 
     correctCount(questions) {
-        return questions.filter(question => question.answerCorrect).length;
+        return Utils.countAnswerCorrect(questions);
     }
 
     wrongCount(questions) {
-        return questions.filter(question => question.answerCorrect !== null && !question.answerCorrect).length;
+        return Utils.countAnswerWrong(questions);
     }
 
     percentageCorrect(questions) {

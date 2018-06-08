@@ -19,3 +19,12 @@ export function answerContains(selectedOption, correctOptions){
     }
     return correctOptions.indexOf(selectedOption) >= 0;
 }
+
+export function countAnswerCorrect(questions){
+    return questions.filter(question => question.answerCorrect).length;
+}
+
+export function countAnswerWrong(questions){
+    return questions.filter(question => question.answerCorrect !== null && !question.answerCorrect).length;
+}
+
