@@ -23,6 +23,10 @@ export function markAnswerWrong(id, correctOption, explanation){
     return { type: ActionTypes.MARK_ANSWER_WRONG, id: id, correctOption: correctOption, explanation: explanation}
 }
 
+export function populateAnswerStats(id, answerStats){
+    return { type: ActionTypes.POPULATE_ANSWER_STATS, id: id, timesAnswered: answerStats.timesAnswered, options: answerStats.options}
+}
+
 export function markAnswerTest(question, selectedOption) {
     return (dispatch, getState) => {
         const { questionDuration } = getState();
@@ -62,6 +66,10 @@ export function submitCheckboxAnswer(question){
             }
         );
         dispatch(TimerActions.resetPerQuestionTimer());
+
+        RestClient.getAnswerStats(question, dispatch).then((json) => {
+            dispatch(populateAnswerStats(question.id, json));
+        });
     }
 }
 

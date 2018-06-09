@@ -45,6 +45,12 @@ export default function QuestionReducer(state = [], action) {
                 ? {...question, answerCorrect: false, correctOption: [...action.correctOption], explanation: action.explanation}
                 : question
             );
+        case ActionTypes.POPULATE_ANSWER_STATS:
+            return state.map(question =>
+                question.id === action.id
+                    ? {...question, answerStats: { timesAnswered: action.timesAnswered, options: action.options}}
+                    : question
+            );
         default:
             return state
     }

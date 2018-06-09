@@ -69,6 +69,24 @@ export let getRandomQuestions = () => {
             });
 };
 
+export let getAnswerStats = (question, dispatch) => {
+    return fetch(process.env.REACT_APP_JAVA_APP_URL + "/api/question/" + question.id + "/answer/stats",
+        {
+            headers: {
+                "Authorization": "Bearer " + TokenHolder.getJwtToken(),
+            }
+        })
+        .then(response => response.json(),
+            error => {
+                dispatch(authError());
+            }
+        )
+        .then(json => {
+            return json
+        });
+};
+
+
 export function defaultValueUser() {
     if(getParameterByName("u") != null){
         return getParameterByName("u");

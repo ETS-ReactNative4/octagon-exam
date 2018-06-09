@@ -14,6 +14,7 @@ import * as Utils from "./utils/Utils";
 import * as RestClient from './api/RestClient'
 import AnswerExplanation from "./components/AnswerExplanation";
 import PieChartTestAnalysis from "./components/PieChartTestAnalysis";
+import BarAnswerStats from "./components/BarAnswerStats";
 
 
 const App = ({match: { params }, history, questions, settings, onSkipQuestionClicked, dispatch}) => {
@@ -43,6 +44,7 @@ const App = ({match: { params }, history, questions, settings, onSkipQuestionCli
                 <div className="col-md-4 col-sm-12">
                     <ScoreBoard questions={questions} />
                     <PieChartTestAnalysis questions={questions}/>
+                    <BarAnswerStats question={questions[getIndex(params)]}/>
                 </div>
             </div>
         );
