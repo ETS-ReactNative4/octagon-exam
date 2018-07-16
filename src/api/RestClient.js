@@ -86,6 +86,23 @@ export let getAnswerStats = (question, dispatch) => {
         });
 };
 
+export let flagQuestion = (question, dispatch, flagValue) => {
+    return fetch(process.env.REACT_APP_JAVA_APP_URL + "/api/question/" + question.id + "/flag/" + flagValue,
+        {
+            headers: {
+                "Authorization": "Bearer " + TokenHolder.getJwtToken(),
+            }
+        })
+        .then(response => response.json(),
+            error => {
+                dispatch(authError());
+            }
+        )
+        .then(json => {
+            return json
+        });
+};
+
 
 export function defaultValueUser() {
     if(getParameterByName("u") != null){

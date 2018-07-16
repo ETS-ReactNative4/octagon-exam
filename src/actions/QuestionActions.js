@@ -73,5 +73,11 @@ export function submitCheckboxAnswer(question){
     }
 }
 
+export function flagQuestion(question, flagValue) {
+    return (dispatch, getState) => {
+        RestClient.flagQuestion(question, dispatch, flagValue);
+    }
+}
+
 
 

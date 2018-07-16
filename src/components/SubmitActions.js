@@ -13,6 +13,10 @@ const SubmitActions = ({onSkipQuestionClicked, settings, dispatch, question}) =>
          }*/
     }
 
+    function flagQuestion(event) {
+        dispatch(QuestionActions.flagQuestion(question, event.target.value));
+    }
+
     return(
     <div>
         {settings.multipleAnswers
@@ -21,6 +25,7 @@ const SubmitActions = ({onSkipQuestionClicked, settings, dispatch, question}) =>
             :
             <button className="btn btn-warning" onClick={onSkipQuestionClicked}>Next</button>
         }
+        <FlagQuestion question={question} flagQuestion={flagQuestion} />
         <p className="margin-top-50">
 
         </p>
@@ -31,11 +36,25 @@ const SubmitActions = ({onSkipQuestionClicked, settings, dispatch, question}) =>
 function MultipleAnswersSubmitButtons(props){
     const {submitAnswer, question, onSkipQuestionClicked} = props;
     if(question.correctOption == null){
-        return <button className="btn btn-success" name="horror" disabled={question.selectedOption === null ? true : false} onClick={submitAnswer}>Submit Answer</button>
+        return <button className="btn btn-success" name="submitTheAnswer" disabled={question.selectedOption === null ? true : false} onClick={submitAnswer}>Submit Answer</button>
     }
     return <button className="btn btn-success" onClick={onSkipQuestionClicked}>Next</button>
 }
 
+function FlagQuestion(props) {
+    const {flagQuestion} = props;
+    return <div className="dropdown pull-right">
+        <button className="btn btn-secondary dropdown-toggle" type="button" id="flagMenuButton"
+                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Flag
+        </button>
+        <div className="dropdown-menu" aria-labelledby="flagMenuButton">
+            <button className="dropdown-item" onClick={flagQuestion} value={1}>Answer not here</button>
+            <button className="dropdown-item" onClick={flagQuestion} value={2}>Question is wrong</button>
+            <button className="dropdown-item" onClick={flagQuestion} value={9}>Other</button>
+        </div>
+    </div>
+}
 
 
 
