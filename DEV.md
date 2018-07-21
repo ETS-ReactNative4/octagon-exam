@@ -34,3 +34,18 @@ headers: {
  
  //then do
  npm run start:dev  ---> this runs fake http
+ 
+4
+build for dev for distribution among devs.
+Install one time only:
+npm install dotenv-cli --save-dev
+
+Then for every build:
+
+erase this line under package.json
+ "homepage": "http://mastermcq.com/app",
+ 
+npm run build-dev
+
+open terminal and type 
+serve -s -p 3000 build
