@@ -43,7 +43,7 @@ export default class AnswerOptions extends Component {
                                         <input type="radio" name="answer" value={option} disabled={question.selectedOption.length > 0} checked={question.selectedOption === option} onClick={() => {this.pushAnswer(option)}}/>
                                     }
                                 </th>
-                                <td className="col-md-1">Option {option}  <MarkRightWrong option={option} question={question} />
+                                <td className="col-md-1">Option {option} {(settings.showAnswersInTheEnd) ? <none/> : <MarkRightWrong option={option} question={question} />}
                                 </td>
                             </tr>
                         )}

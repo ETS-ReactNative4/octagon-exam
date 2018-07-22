@@ -51,6 +51,7 @@ let predefineStateFromServer = {
     ],
     "settings" : {
         "multipleAnswers" : true,
+        "showAnswersInTheEnd": true
     },
     "auth": {
         "userAuthenticated" : true,

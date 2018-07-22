@@ -56,7 +56,7 @@ export function pushCheckboxAnswer(question, selectedValue, isChecked){
 export function submitCheckboxAnswer(question){
     return (dispatch, getState) => {
         const { questionDuration } = getState();
-       // RestClient.noteQuestionDurationTime(questionDuration.counter, question.id, dispatch, "ANSWERED"); //TODO nowshad reactivate
+        RestClient.noteQuestionDurationTime(questionDuration.counter, question.id, dispatch, "ANSWERED"); //TODO nowshad reactivate
         RestClient.matchAnswer(question, dispatch).then((json) => {
                 if(Utils.answerMatches(question.selectedOption, json.correctOption, json.explanation)){
                     dispatch(markAnswerCorrect(question.id, json.correctOption, json.explanation));
