@@ -15,6 +15,10 @@ import * as RestClient from './api/RestClient'
 import AnswerExplanation from "./components/AnswerExplanation";
 import PieChartTestAnalysis from "./components/PieChartTestAnalysis";
 import BarAnswerStats from "./components/BarAnswerStats";
+import Alert from 'react-s-alert';
+
+import 'react-s-alert/dist/s-alert-default.css';
+import 'react-s-alert/dist/s-alert-css-effects/slide.css';
 
 
 const App = ({match: { params }, history, questions, settings, onSkipQuestionClicked, dispatch}) => {
@@ -32,6 +36,7 @@ const App = ({match: { params }, history, questions, settings, onSkipQuestionCli
             <div className="row">
                 <div className="col-md-8 col-sm-12">
                     <LoginRedirectMonitor />
+                    <Alert stack={{limit: 2}} />
                     <Timer />
                     <QuestionPic picUrl={questions[getIndex(params)].picUrl} />
                     <AnswerOptions question={questions[getIndex(params)]} dispatch={dispatch} history={history} index={getIndex(params)} totalQuestion={questions.length} settings={settings}/>

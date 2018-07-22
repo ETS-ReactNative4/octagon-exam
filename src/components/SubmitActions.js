@@ -2,6 +2,8 @@ import React, {Component} from 'react'
 import PropTypes from 'prop-types'
 import * as QuestionActions from "../actions/QuestionActions";
 import * as Utils from "../utils/Utils";
+import Alert from 'react-s-alert';
+
 
 const SubmitActions = ({onSkipQuestionClicked, settings, dispatch, question}) => {
     function submitAnswer(event){
@@ -15,6 +17,9 @@ const SubmitActions = ({onSkipQuestionClicked, settings, dispatch, question}) =>
 
     function flagQuestion(event) {
         dispatch(QuestionActions.flagQuestion(question, event.target.value));
+        Alert.success('Question has been flagged', {
+            position: 'bottom-right'
+        });
     }
 
     return(

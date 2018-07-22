@@ -49,3 +49,9 @@ npm run build-dev
 
 open terminal and type 
 serve -s -p 3000 build
+
+
+5
+https://www.npmjs.com/package/react-s-alert
+
+npm install react-s-alert --save
