@@ -5,7 +5,7 @@ import * as Utils from "../utils/Utils";
 import Alert from 'react-s-alert';
 
 
-const SubmitActions = ({onSkipQuestionClicked, settings, dispatch, question}) => {
+const SubmitActions = ({onSkipQuestionClicked, onNextQuestionClicked, settings, dispatch, question}) => {
     function submitAnswer(event){
         console.log( event.target.name);
         dispatch(QuestionActions.submitCheckboxAnswer(question));
@@ -26,7 +26,7 @@ const SubmitActions = ({onSkipQuestionClicked, settings, dispatch, question}) =>
     <div>
         {settings.multipleAnswers
             ?
-            <MultipleAnswersSubmitButtons question={question} submitAnswer={submitAnswer} onSkipQuestionClicked={onSkipQuestionClicked}/>
+            <MultipleAnswersSubmitButtons question={question} submitAnswer={submitAnswer} onNextQuestionClicked={onNextQuestionClicked} onSkipQuestionClicked={onSkipQuestionClicked}/>
             :
             <button className="btn btn-warning" onClick={onSkipQuestionClicked}>Next</button>
         }
@@ -39,11 +39,14 @@ const SubmitActions = ({onSkipQuestionClicked, settings, dispatch, question}) =>
 };
 
 function MultipleAnswersSubmitButtons(props){
-    const {submitAnswer, question, onSkipQuestionClicked} = props;
+    const {submitAnswer, question, onNextQuestionClicked, onSkipQuestionClicked} = props;
     if(question.correctOption == null){
-        return <button className="btn btn-success" name="submitTheAnswer" disabled={question.selectedOption === null ? true : false} onClick={submitAnswer}>Submit Answer</button>
+        return <span>
+            <button className="btn btn-success" name="submitTheAnswer" disabled={question.selectedOption === null ? true : false} onClick={submitAnswer}>Submit Answer</button>
+            <button className="btn btn-secondary margin-left-25" onClick={onSkipQuestionClicked}>Skip</button>
+        </span>
     }
-    return <button className="btn btn-success" onClick={onSkipQuestionClicked}>Next</button>
+    return <button className="btn btn-success" onClick={onNextQuestionClicked}>Next</button>
 }
 
 function FlagQuestion(props) {
@@ -66,6 +69,7 @@ function FlagQuestion(props) {
 
 SubmitActions.propTypes = {
     onSkipQuestionClicked: PropTypes.func.isRequired,
+    onNextQuestionClicked: PropTypes.func.isRequired,
     settings: PropTypes.object.isRequired,
     question: PropTypes.object.isRequired,
     dispatch: PropTypes.func.isRequired

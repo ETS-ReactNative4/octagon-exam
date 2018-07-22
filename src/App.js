@@ -21,7 +21,7 @@ import 'react-s-alert/dist/s-alert-default.css';
 import 'react-s-alert/dist/s-alert-css-effects/slide.css';
 
 
-const App = ({match: { params }, history, questions, settings, onSkipQuestionClicked, dispatch}) => {
+const App = ({match: { params }, history, questions, settings, onSkipQuestionClicked, onNextQuestionClicked, dispatch}) => {
     if(questions.length == 0){
         return(
             <div className="row">
@@ -43,6 +43,9 @@ const App = ({match: { params }, history, questions, settings, onSkipQuestionCli
                     <AnswerExplanation question={questions[getIndex(params)]} />
                     <SubmitActions onSkipQuestionClicked={() => {
                         dispatch(onSkipQuestionClicked(questions[getIndex(params)].id));
+                        Utils.redirectToNextQuestion(history, getIndex(params), questions.length);
+                    }} onNextQuestionClicked={() => {
+                        dispatch(onNextQuestionClicked(questions[getIndex(params)].id));
                         Utils.redirectToNextQuestion(history, getIndex(params), questions.length);
                     }} dispatch={dispatch} settings={settings} question={questions[getIndex(params)]}/>
                 </div>
@@ -77,6 +80,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = (dispatch) => ({
     onSkipQuestionClicked: QuestionActions.skipQuestion,
+    onNextQuestionClicked: QuestionActions.nextQuestion,
     dispatch
 });
 

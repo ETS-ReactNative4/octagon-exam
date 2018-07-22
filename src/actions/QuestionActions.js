@@ -11,6 +11,14 @@ export function skipQuestion (questionId) {
        return ({ type: ActionTypes.SKIP_QUESTION, id: questionId});
     };
 }
+
+export function nextQuestion (questionId) {
+    return (dispatch, getState) => {
+        const { questionDuration } = getState();
+        dispatch(TimerActions.resetPerQuestionTimer());
+    };
+}
+
 export function markAnswer(id, selectedValue, isChecked = true){
     return { type: ActionTypes.MARK_ANSWER, id: id, selectedValue: selectedValue, isChecked: isChecked}
 }
