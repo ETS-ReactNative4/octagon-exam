@@ -54,12 +54,13 @@ function FlagQuestion(props) {
     return <div className="dropdown pull-right">
         <button className="btn btn-secondary dropdown-toggle" type="button" id="flagMenuButton"
                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Flag
+            It appears to me that...
         </button>
         <div className="dropdown-menu" aria-labelledby="flagMenuButton">
-            <button className="dropdown-item" onClick={flagQuestion} value={1}>Answer not here</button>
-            <button className="dropdown-item" onClick={flagQuestion} value={2}>Question is wrong</button>
-            <button className="dropdown-item" onClick={flagQuestion} value={9}>Other</button>
+            <button className="dropdown-item" onClick={flagQuestion} value={1}>The correct answer is not in the options</button>
+            <button className="dropdown-item" onClick={flagQuestion} value={2}>There is a mistake in the question</button>
+            <button className="dropdown-item" onClick={flagQuestion} value={3}>The given correct answer is not the actual correct one</button>
+            <button className="dropdown-item" onClick={flagQuestion} value={4}>This question is not relevant to my course syllabus</button>
         </div>
     </div>
 }
