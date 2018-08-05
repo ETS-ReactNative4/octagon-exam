@@ -2,7 +2,7 @@
   "name": "octagon-exam",
   "version": "0.1.0",
   "private": true,
-  "homepage": "http://mastermcq.com/app",
+  "homepage": "http://medprepbd.com/app",
   "dependencies": {
     "chart.js": "^2.7.2",
     "cross-fetch": "^1.1.1",
