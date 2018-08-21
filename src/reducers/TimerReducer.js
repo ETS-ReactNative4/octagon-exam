@@ -9,6 +9,10 @@ export default function TimerReducer(state = [], action) {
             return  {...state, start: action.start};
         case ActionTypes.RESET_PER_QUESTION_TIMER :
             return {...state, counter: 0};
+        case ActionTypes.HIDE_QUESTION_TIMER :
+            return {...state, show: action.show};
+        case ActionTypes.SHOW_QUESTION_TIMER :
+            return {...state, show: action.show};
         default:
             return state
     }

@@ -58,7 +58,8 @@ let predefineStateFromServer = {
     },
     "questionDuration": {
         "start" : true,
-        "counter" : 0
+        "counter" : 0,
+        "show" : false
     }
 
 };

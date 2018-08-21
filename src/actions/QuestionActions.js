@@ -6,7 +6,9 @@ import * as Utils from "../utils/Utils";
 export function skipQuestion (questionId) {
     return (dispatch, getState) => {
        const { questionDuration } = getState();
+       dispatch(TimerActions.showQuestionTimer());
        dispatch(TimerActions.resetPerQuestionTimer());
+
        RestClient.noteQuestionDurationTime(questionDuration.counter, questionId, dispatch, "SKIPPED");
        return ({ type: ActionTypes.SKIP_QUESTION, id: questionId});
     };
@@ -15,6 +17,7 @@ export function skipQuestion (questionId) {
 export function nextQuestion (questionId) {
     return (dispatch, getState) => {
         const { questionDuration } = getState();
+        dispatch(TimerActions.showQuestionTimer());
         dispatch(TimerActions.resetPerQuestionTimer());
     };
 }
@@ -73,7 +76,9 @@ export function submitCheckboxAnswer(question){
                 }
             }
         );
+        dispatch(TimerActions.hideQuestionTimer());
         dispatch(TimerActions.resetPerQuestionTimer());
+
 
         RestClient.getAnswerStats(question, dispatch).then((json) => {
             dispatch(populateAnswerStats(question.id, json));

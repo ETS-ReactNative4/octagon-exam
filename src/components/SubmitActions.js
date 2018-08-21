@@ -52,6 +52,7 @@ function MultipleAnswersSubmitButtons(props){
 function FlagQuestion(props) {
     const {flagQuestion} = props;
     return <div className="dropdown pull-right">
+        <div>Click here to flag question:</div>
         <button className="btn btn-secondary dropdown-toggle" type="button" id="flagMenuButton"
                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             It appears to me that...
