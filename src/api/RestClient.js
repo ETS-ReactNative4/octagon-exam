@@ -21,7 +21,7 @@ export let matchAnswer = (question, dispatch) => {
             .then(json => {
                 console.log(json);
                 console.log("jwtToken " + TokenHolder.getJwtToken());
-                return json.success} );
+                return json} );
 };
 
 export let noteQuestionDurationTime = (count, questionId, dispatch, action) => {
@@ -60,13 +60,49 @@ export let getRandomQuestions = () => {
                 return response.json();
             }, error => console.log('An error occurred. questions', error))
             .then(json => {
-                console.log("questions suc"  + json);
+                console.log("questions suc"  + JSON.stringify(json));
               //  console.log(json);
                 json.auth = { userAuthenticated : true};
                 json.questionDuration = {start: true};
+             //   json.settings = {multipleAnswers: true};
                 return json
             });
 };
+
+export let getAnswerStats = (question, dispatch) => {
+    return fetch(process.env.REACT_APP_JAVA_APP_URL + "/api/question/" + question.id + "/answer/stats",
+        {
+            headers: {
+                "Authorization": "Bearer " + TokenHolder.getJwtToken(),
+            }
+        })
+        .then(response => response.json(),
+            error => {
+                dispatch(authError());
+            }
+        )
+        .then(json => {
+            return json
+        });
+};
+
+export let flagQuestion = (question, dispatch, flagValue) => {
+    return fetch(process.env.REACT_APP_JAVA_APP_URL + "/api/question/" + question.id + "/flag/" + flagValue,
+        {
+            headers: {
+                "Authorization": "Bearer " + TokenHolder.getJwtToken(),
+            }
+        })
+        .then(response => response.json(),
+            error => {
+                dispatch(authError());
+            }
+        )
+        .then(json => {
+            return json
+        });
+};
+
 
 export function defaultValueUser() {
     if(getParameterByName("u") != null){

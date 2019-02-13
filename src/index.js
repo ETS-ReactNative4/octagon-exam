@@ -18,31 +18,48 @@ let predefineStateFromServer = {
             id: 2,
             "isAnswered": false,
             'picUrl': 'question-sample.png',
-            'selectedOption': null,
-            'answerCorrect': null
+            'selectedOption': [],
+            'answerCorrect': null,
+            'explanation': "Here is the explanation",
+            'correctOption' : ['D'],
+            'answerStats' :{
+                'timesAnswered': 200,
+                'options' :[
+                     36,
+                    24,
+                     10,
+                    30
+                ]
+            }
         },
         {
             id: 3,
             "isAnswered": false,
             'picUrl': 'question-sample-2.png',
-            'selectedOption': null,
+            'selectedOption': [],
             'answerCorrect': null,
-            'correctOption' : 'D'
+            'correctOption' : ['D'],
+            'explanation': null
         },
         {
             id: 4,
             "isAnswered": false,
             'picUrl': 'question-sample-3.png',
-            'selectedOption': null,
+            'selectedOption': [],
             'answerCorrect': null
         }
     ],
+    "settings" : {
+        "multipleAnswers" : true,
+        "showAnswersInTheEnd": true
+    },
     "auth": {
         "userAuthenticated" : true,
     },
     "questionDuration": {
         "start" : true,
-        "counter" : 0
+        "counter" : 0,
+        "show" : false
     }
 
 };

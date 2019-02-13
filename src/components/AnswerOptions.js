@@ -9,23 +9,26 @@ export default class AnswerOptions extends Component {
         dispatch: PropTypes.func.isRequired,
         history: PropTypes.object.isRequired,
         index: PropTypes.number.isRequired,
-        totalQuestion: PropTypes.number.isRequired
+        totalQuestion: PropTypes.number.isRequired,
+        settings: PropTypes.object
     };
 
-    pushAnswer(value){
-        const {dispatch, question, history, index, totalQuestion} = this.props;
-        if (question.selectedOption === null) {
+    pushAnswer(value, event){
+        const {dispatch, question, history, index, totalQuestion, settings} = this.props;
+        if(settings.multipleAnswers){
+            console.log("selected? ", event.target.checked);
+            dispatch(QuestionActions.pushCheckboxAnswer(question, value, event.target.checked));
+        }else if (question.selectedOption.length === 0) {
             dispatch(QuestionActions.markAnswerTest(question, value));
         }
 
       //  Utils.redirectToNextQuestion(history, index, totalQuestion);
-
-
     }
 
     render(){
-        const {question} = this.props;
+        const {question, settings} = this.props;
         const options = ['A', 'B', 'C', 'D'];
+
         return(
             <div className="margin-top-25">
                 <div className="text-muted">(Please Select one Option)</div>
@@ -33,9 +36,14 @@ export default class AnswerOptions extends Component {
                     <tbody>
                         {options.map((option) =>
                             <tr>
-                                <th scope="row"><input type="radio" name="answer" value={option} disabled={question.selectedOption !== null} checked={question.selectedOption === option} onClick={() => {this.pushAnswer(option)}}/></th>
-                                <td className="col-md-1">Option {option} {(option === question.correctOption) ?  <span className="text text-success bolder small margin margin-left-25"> >> Correct</span> : '' }
-                                    {(option === question.selectedOption && question.correctOption !== question.selectedOption) ?  <span className="text text-danger small margin-left-25"> x Wrong Answer</span> : '' }
+                                <th scope="row">
+                                    {(settings.multipleAnswers) ?
+                                        <input type="checkbox" name="answer" className={"exam-options"} value={option} checked={question.selectedOption !== null && question.selectedOption.indexOf(option) >= 0} onClick={(event) => {this.pushAnswer(option, event)}}/>
+                                     :
+                                        <input type="radio" name="answer" value={option} disabled={question.selectedOption.length > 0} checked={question.selectedOption === option} onClick={() => {this.pushAnswer(option)}}/>
+                                    }
+                                </th>
+                                <td className="col-md-1">Option {option} {(settings.showAnswersInTheEnd) ? <none/> : <MarkRightWrong option={option} question={question} />}
                                 </td>
                             </tr>
                         )}
@@ -44,4 +52,19 @@ export default class AnswerOptions extends Component {
             </div>
         )
     }
+}
+
+function MarkRightWrong(props){
+    const {question, option} = props;
+    let selection = true;
+    if(question.correctOption === undefined){
+        selection = false;
+    }
+
+    if(selection && Utils.answerContains(option, question.correctOption)){
+        return <span className="text text-success bolder small margin margin-left-25"> <i className="fa fa-check" aria-hidden="true" /> Correct</span>
+    } else if(selection && question.selectedOption.indexOf(option) >= 0){
+        return <span className="text text-danger small margin-left-25"> <i className="fa fa-times" aria-hidden="true"/> Wrong Answer</span>
+    }
+    return null;
 }

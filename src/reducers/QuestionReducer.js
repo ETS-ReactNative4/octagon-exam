@@ -13,10 +13,20 @@ const initialState = [
 export default function QuestionReducer(state = [], action) {
     switch (action.type) {
         case "MARK_ANSWER" :
-            return state.map(answer =>
-                answer.id === action.id
-                    ? {...answer, isAnswered: true, selectedOption: action.selectedOption}
-                    : answer);
+            return state.map(answer => {
+                if(answer.id === action.id){
+                    const savedOptions = new Set(answer.selectedOption);
+                    if(action.isChecked){
+                        savedOptions.add(action.selectedValue);
+                    } else {
+                        savedOptions.delete(action.selectedValue);
+                    }
+
+                    return {...answer, isAnswered: true,  selectedOption: [...savedOptions]}
+                } else {
+                    return answer;
+                }
+            });
         case ActionTypes.SKIP_QUESTION :
          //   alert("SKIP_QUESTION " + action.id);
             return state.map(question =>
@@ -26,14 +36,20 @@ export default function QuestionReducer(state = [], action) {
         case ActionTypes.MARK_ANSWER_CORRECT:
             return state.map(question =>
                 question.id === action.id
-                ? {...question, answerCorrect: true, correctOption: action.correctOption}
+                ? {...question, answerCorrect: true, correctOption: [...action.correctOption], explanation: action.explanation}
                 : question
             );
         case ActionTypes.MARK_ANSWER_WRONG:
             return state.map(question =>
                 question.id === action.id
-                ? {...question, answerCorrect: false, correctOption: action.correctOption}
+                ? {...question, answerCorrect: false, correctOption: [...action.correctOption], explanation: action.explanation}
                 : question
+            );
+        case ActionTypes.POPULATE_ANSWER_STATS:
+            return state.map(question =>
+                question.id === action.id
+                    ? {...question, answerStats: { timesAnswered: action.timesAnswered, options: action.options}}
+                    : question
             );
         default:
             return state
