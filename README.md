@@ -1,4 +1,4 @@
-# screen shot
+## Screenshot
 https://www.screencast.com/t/c5KlswMi
 https://www.screencast.com/t/ORuaFZ26
 https://www.screencast.com/t/CKtQVfIIWVh
